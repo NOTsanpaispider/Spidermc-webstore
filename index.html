@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SpiderMC Webstore</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: black;
+        font-family: 'Poppins', sans-serif;
+        overflow: hidden;
+      }
+
+      /* Intro screen */
+      .intro {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: radial-gradient(circle at center, #001a33, #000);
+        color: #00aaff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        z-index: 9999;
+        animation: fadeOut 1.5s ease forwards;
+        animation-delay: 2.5s; /* total 4s before gone */
+      }
+
+      .intro h1 {
+        font-size: 3rem;
+        letter-spacing: 2px;
+        animation: glow 2s ease-in-out infinite alternate;
+      }
+
+      .intro p {
+        margin-top: 10px;
+        color: #66ccff;
+        font-size: 1rem;
+        opacity: 0.8;
+      }
+
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px #0078ff, 0 0 20px #0078ff;
+        }
+        to {
+          text-shadow: 0 0 30px #00ccff, 0 0 60px #00ccff;
+        }
+      }
+
+      @keyframes fadeOut {
+        to {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+
+      /* Main site */
+      .main {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        animation: fadeIn 1s ease forwards;
+        animation-delay: 3.5s; /* appears as intro fades */
+        text-align: center;
+        color: #00aaff;
+      }
+
+      .main h2 {
+        font-size: 3.2rem;
+        font-weight: 800;
+        text-shadow: 0 0 15px #008cff, 0 0 30px #00cfff;
+      }
+
+      .main p {
+        margin-top: 10px;
+        font-size: 1.3rem;
+        color: #b3e0ff;
+        text-shadow: 0 0 8px #004c99;
+      }
+
+      a.btn {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 14px 36px;
+        background: linear-gradient(90deg, #0078ff, #00c6ff);
+        color: white;
+        border-radius: 12px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 0 20px rgba(0, 123, 255, 0.6);
+        transition: all 0.3s ease;
+      }
+
+      a.btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 40px rgba(0, 204, 255, 0.9);
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Intro animation -->
+    <div class="intro">
+      <h1>Welcome to SpiderMC Webstore</h1>
+      <p>Loading your Minecraft adventure...</p>
+    </div>
+
+    <!-- Main content -->
+    <div class="main">
+      <h2>🕸️ SpiderMC Store</h2>
+      <p>Buy ranks, coins, and more to enhance your gameplay!</p>
+      <a href="store.html" class="btn">Enter Store</a>
+    </div>
+  </body>
+</html>

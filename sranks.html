@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SpiderMC Webstore</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif;
+    }
+    body {
+      background: #00111f;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(90deg, #003366, #005599);
+      padding: 20px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #b3e0ff;
+      text-shadow: 0 0 10px #008cff;
+      border-bottom: 2px solid #0078ff;
+      cursor: pointer;
+    }
+
+    .container {
+      display: flex;
+      flex: 1;
+      min-height: 0; /* important for flex child scroll */
+    }
+
+    .sidebar {
+      width: 230px;
+      background: #002244;
+      border-right: 2px solid #004c99;
+      padding: 20px;
+    }
+
+    .sidebar h3 {
+      color: #66ccff;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      border-bottom: 1px solid #004c99;
+      padding-bottom: 10px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li {
+      margin-bottom: 15px;
+    }
+
+    .sidebar ul li a {
+      color: #b3e0ff;
+      text-decoration: none;
+      font-size: 1rem;
+      display: block;
+      padding: 10px 12px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .sidebar ul li a:hover {
+      background: #004c99;
+      color: white;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+      min-height: 0; /* so it scrolls properly */
+    }
+
+    .info-section {
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+      background: #002a4d;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 150, 255, 0.3);
+    }
+
+    .info-section h1 {
+      color: #66ccff;
+      font-size: 2rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 15px #00aaff;
+    }
+
+    .info-section p {
+      color: #b3e0ff;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .coupon-box {
+      background: #001d33;
+      border: 1px solid #004c99;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 25px;
+    }
+
+    .coupon-box h3 {
+      color: #00c6ff;
+      margin-bottom: 8px;
+    }
+
+    .coupon-box input {
+      width: 70%;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      background: #002244;
+      color: white;
+    }
+
+    .coupon-box button {
+      padding: 8px 15px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #0078ff;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .coupon-box button:hover {
+      background: #00bfff;
+    }
+
+    .store-content {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* exactly 3 cards per row */
+      gap: 30px;
+      max-width: 960px;
+      margin: auto;
+      padding: 40px 60px;
+      overflow-y: auto;
+      min-height: 0;
+    }
+
+    .item-card {
+      background: #002a4d;
+      border: 2px solid #004c99;
+      border-radius: 18px;
+      padding: 25px;
+      width: 100%;
+      min-height: 360px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(0, 200, 255, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .item-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 35px rgba(0, 200, 255, 0.6);
+    }
+
+    .item-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .item-card h4 {
+      color: #66ccff;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px #0099ff;
+    }
+
+    .item-card p {
+      color: #b3e0ff;
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      flex-grow: 1;
+    }
+
+    .item-card span {
+      display: block;
+      color: #00ccff;
+      font-weight: 600;
+      margin-bottom: 5px;
+      font-size: 1.2rem;
+    }
+
+    .add-to-cart-btn {
+      background: #0078ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 0;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 15px;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    .add-to-cart-btn:hover {
+      background: #00bfff;
+      box-shadow: 0 0 10px #00aaff;
+    }
+
+    .cart {
+      width: 260px;
+      background: #002a4d;
+      border-left: 2px solid #004c99;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cart h3 {
+      text-align: center;
+      color: #66ccff;
+      border-bottom: 1px solid #004c99;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    .cart-items {
+      flex-grow: 1;
+      overflow-y: auto;
+      color: #b3e0ff;
+      font-size: 0.9rem;
+    }
+
+    .cart button {
+      background: linear-gradient(90deg, #0078ff, #00bfff);
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .cart button:hover {
+      background: linear-gradient(90deg, #00bfff, #00ffff);
+      transform: scale(1.03);
+    }
+
+    /* Popup */
+    .rank-popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background: #001a33;
+      border: 2px solid #0078ff;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 800px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 0 30px rgba(0, 200, 255, 0.3);
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header onclick="showSection('info')">🕸️ SpiderMC Webstore</header>
+
+  <div class="container">
+    <div class="sidebar">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="store.html" onclick="showSection('info')">🏠 Home / Info</a></li>
+        <li><a href="ranks.html#lranks" onclick="showSection('lifesteal')">🩸 Lifesteal Ranks</a></li>
+        <li><a href="coin.html" onclick="showSection('coins')">💰 Coins</a></li>
+        <li><a href="sranks.html" onclick="showSection('ranks')">⭐ Ranks</a></li>
+        <li><a href="cart.html" style="color: #00ccff; ; cursor: pointer;">🛒 View Cart</a></li>
+      </ul>
+    </div>
+
+
+      <!-- Ranks Section -->
+      <section id="ranks" class="store-content" style="display:none;">
+        <!-- VIP (Lifetime) -->
+        <div class="item-card">
+          <img src="vip.png" alt="VIP Rank" />
+          <h4>⭐ VIP (Lifetime)</h4>
+          <span>₹200</span>
+          <p>Basic rank with lifetime perks.</p>
+          <button class="add-to-cart-btn" onclick="addToCart('VIP (Lifetime)', 200)">Add to Cart</button>
+        </div>
+
+        <!-- VIP+ (Lifetime) -->
+        <div class="item-card">
+          <img src="vip+.png" alt="VIP Plus Rank" />
+          <h4>🌟 VIP+ (Lifetime)</h4>
+          <span>₹300</span>
+          <p>VIP+ rank with lifetime perks.</p>
+          <button class="add-to-cart-btn" onclick="addToCart('VIP+ (Lifetime)', 300)">Add to Cart</button>
+        </div>
+
+        <!-- MVP (Lifetime) -->
+        <div class="item-card">
+          <img src="mvp.png" alt="MVP Rank" />
+          <h4>💎 MVP (Lifetime)</h4>
+          <span>₹400</span>
+          <p>Mid-tier rank with lifetime premium perks.</p>
+          <button class="add-to-cart-btn" onclick="addToCart('MVP (Lifetime)', 400)">Add to Cart</button>
+        </div>
+
+        <!-- MVP+ (365 days) -->
+        <div class="item-card">
+          <img src="mvp+.png" alt="MVP Plus Rank" />
+          <h4>💠 MVP+ (365 days)</h4>
+          <span>₹470</span>
+          <p>MVP+ rank with enhanced perks for one year.</p>
+          <button class="add-to-cart-btn" onclick="addToCart('MVP+ (365 days)', 470)">Add to Cart</button>
+        </div>
+
+        <!-- Special (365 days) -->
+        <div class="item-card">
+          <img src="special.png" alt="Special Rank" />
+          <h4>✨ Special Rank (365 days)</h4>
+          <span>₹1000</span>
+          <p>Exclusive perks & unique benefits for one year.</p>
+          <button class="add-to-cart-btn" onclick="addToCart('Special Rank (365 days)', 1000)">Add to Cart</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      // Hide all sections
+      document.querySelectorAll("main .store-content, main .info-section").forEach((sec) => {
+        sec.style.display = "none";
+      });
+
+      // Show the selected section
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.style.display = sectionId === "info" ? "block" : "grid";
+      }
+    }
+
+    // Show home info by default
+    showSection("ranks");
+
+    // Cart functionality (simple demo)
+    const cart = [];
+
+    function addToCart(itemName, price) {
+      cart.push({ name: itemName, price: price });
+      alert(`Added "${itemName}" to cart at ₹${price}`);
+      // You can enhance this by updating cart UI
+    }
+
+    function applyCoupon() {
+      const couponInput = document.getElementById("coupon");
+      const code = couponInput.value.trim();
+      if (!code) {
+        alert("Please enter a coupon code.");
+        return;
+      }
+      // For demo, just accept "SPIDER10" for 10% off
+      if (code.toUpperCase() === "SPIDER10") {
+        alert("Coupon applied! You get 10% off.");
+      } else {
+        alert("Invalid coupon code.");
+      }
+    }
+function addToCart(itemName, price) {
+  // Get existing cart or empty array
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  // Add new item
+  cart.push({ name: itemName, price: price });
+
+  // Save back to localStorage
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  // Redirect to cart page
+  window.location.href = 'cart.html';
+}
+
+  </script>
+</body>
+</html>

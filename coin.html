@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SpiderMC Webstore - Coins</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+    body {
+      background: #00111f;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(90deg, #003366, #005599);
+      padding: 20px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #b3e0ff;
+      text-shadow: 0 0 10px #008cff;
+      border-bottom: 2px solid #0078ff;
+      cursor: pointer;
+    }
+
+    .container {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 80px);
+    }
+
+    .sidebar {
+      width: 230px;
+      background: #002244;
+      border-right: 2px solid #004c99;
+      padding: 20px;
+    }
+
+    .sidebar h3 {
+      color: #66ccff;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      border-bottom: 1px solid #004c99;
+      padding-bottom: 10px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li {
+      margin-bottom: 15px;
+    }
+
+    .sidebar ul li a {
+      color: #b3e0ff;
+      text-decoration: none;
+      font-size: 1rem;
+      display: block;
+      padding: 10px 12px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .sidebar ul li a:hover {
+      background: #004c99;
+      color: white;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .store-content {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      padding: 20px 10px;
+    }
+
+      .item-card {
+    background: #002a4d;
+    border: 2px solid #004c99;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .item-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(0,153,255,0.5);
+  }
+  .item-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+  .item-card button {
+    background: linear-gradient(90deg, #0078ff, #00bfff);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 8px;
+  }
+  .item-card button:hover {
+    background: linear-gradient(90deg, #00bfff, #00ffff);
+    transform: scale(1.05);
+  }
+
+    /* Scrollbar for main-content if content overflows vertically */
+    .main-content::-webkit-scrollbar {
+      width: 10px;
+    }
+    .main-content::-webkit-scrollbar-track {
+      background: #00111f;
+      border-radius: 10px;
+    }
+    .main-content::-webkit-scrollbar-thumb {
+      background: #004c99;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>🕸️ SpiderMC Webstore</header>
+
+  <div class="container">
+    <div class="sidebar">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="store.html">🏠 Home / Info</a></li>
+        <li><a href="ranks.html#lranks">🩸 Lifesteal Ranks</a></li>
+        <li><a href="#">💰 Coins</a></li>
+        <li><a href="sranks.html">⭐ Ranks</a></li>
+        <li><a href="cart.html" style="color: #00ccff; ; cursor: pointer;">🛒 View Cart</a></li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <section id="coins" class="store-content">
+
+  <div class="item-card">
+  <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/ab9733ca2acb1e1aff6a9e42614593f91770f756.png" alt="Extra Small Coin Pack" />
+  <h4>💰 Extra Small Pack</h4>
+  <span>₹50</span>
+  <p>Get 500 Coins instantly</p>
+  <button onclick="addToCart('Extra Small Pack', 50)"> Add to Cart</button>
+</div>
+
+<div class="item-card">
+  <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/be2375bf6a8a4da573fa3a3c0a1673ccbb2fe236.png" alt="Small Coin Pack" />
+  <h4>💰 Small Coin Pack</h4>
+  <span>₹100</span>
+  <p>Get 1,000 Coins instantly</p>
+  <button onclick="addToCart('Small Coin Pack', 100)"> Add to Cart</button>
+</div>
+
+<div class="item-card">
+  <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/d5e9eae2458092706bd8627fe0e2982e525a8285.png" alt="Medium Coin Pack" />
+  <h4>💰 Medium Coin Pack</h4>
+  <span>₹450</span>
+  <p>Get 5,000 Coins instantly</p>
+  <button onclick="addToCart('Medium Coin Pack', 450)"> Add to Cart</button>
+</div>
+
+<div class="item-card">
+  <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/04ee3288445e1ef07d9176d1e24878542b105aad.png" alt="Large Coin Pack" />
+  <h4>💰 Large Coin Pack</h4>
+  <span>₹850</span>
+  <p>Get 6,000 Coins instantly</p>
+  <button onclick="addToCart('Large Coin Pack', 850)"> Add to Cart</button>
+</div>
+
+<div class="item-card">
+  <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/ae29b4e3d8f71da649e058b9345037c013865e24.png" alt="Extra Large Coin Pack" />
+  <h4>🪙 Extra Large Pack</h4>
+  <span>₹1500</span>
+  <p>Get 10,000 Coins instantly</p>
+  <button onclick="addToCart('Extra Large Pack', 1500)"> Add to Cart</button>
+</div>
+
+<div class="item-card">
+  <img src="https://dunb17ur4ymx4.cloudfront.net/packages/images/45d01c4ede98bc621e591dc3c486fe6bb9c9d8c4.png" alt="Mega Coin Pack" />
+  <h4>🪙 Mega Pack</h4>
+  <span>₹2500</span>
+  <p>Get 15,000 Coins instantly</p>
+  <button onclick="addToCart('Mega Pack', 2500)"> Add to Cart</button>
+</div>
+
+
+       
+
+      </section>
+    </div>
+  </div>
+<script>
+function addToCart(itemName, price) {
+  // Get existing cart or empty array
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  // Add new item
+  cart.push({ name: itemName, price: price });
+
+  // Save back to localStorage
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  // Redirect to cart page
+  window.location.href = 'cart.html';
+}
+
+</script>
+</body>
+</html>
